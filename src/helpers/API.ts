@@ -1,0 +1,1 @@
+export const PREFIX = 'https://api.escuelajs.co/api/v1/auth';
