@@ -1,0 +1,17 @@
+.button {
+	display: flex;
+	padding: 16px 32px;
+	justify-content: center;
+	align-items: center;
+	gap: 8px;
+	border-radius: 12px;
+	border: 2px solid var(--primary-400, #7B6EF6);
+	background: var(--primary-400, #7B6EF6);
+	color: var(--white-100, #FFF);
+	font-family: 'Poppins', sans-serif;
+	max-width: 200px;
+}
+
+.button:hover {
+	background: #373698;
+}
