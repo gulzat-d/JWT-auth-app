@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getTokens } from '../../store/user.slice';
 import { RootState } from '../../store/store';
 import { useNavigate } from 'react-router-dom';
+import styles from './Auth.module.css';
 
 function Auth() {
 
@@ -27,14 +28,24 @@ function Auth() {
 	}, [jwt])
 
 	return (
-		<>
-			{loginErrorMessage && <div>Неверный логин или пароль</div>}
-			<form onSubmit={submit}>
-				<Input placeholder='Введите логин' type='text' name='login'></Input>
-				<Input placeholder='Введите пароль' type='password' name='password'></Input>
-				<Button>Войти</Button>
-			</form>
-		</>
+		<div className={styles.container}>
+			<img src="/public/human.svg" alt="Декорация" />
+			<div className={styles.wrapper}>
+				<form onSubmit={submit} className={styles.form}>
+					{loginErrorMessage && <div>Неверный логин или пароль</div>}
+					<div className={styles.formItem}>
+						<label className={styles.label}>Ваш логин</label>
+						<Input placeholder='Логин' type='text' name='login'></Input>
+					</div>
+					<div className={styles.formItem}>
+						<label className={styles.label}>Ваш пароль</label>
+						<Input placeholder='Пароль' type='password' name='password'></Input>
+					</div>
+					<Button>Войти</Button>
+				</form>
+			</div>
+			<img src="/public/human2.svg" alt="Декорация" />
+		</div>
 	)
 }
 

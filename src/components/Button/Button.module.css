@@ -5,11 +5,13 @@
 	align-items: center;
 	gap: 8px;
 	border-radius: 12px;
-	border: 2px solid var(--primary-400, #7B6EF6);
-	background: var(--primary-400, #7B6EF6);
-	color: var(--white-100, #FFF);
+	border: 2px solid  #7B6EF6;
+	background:  #7B6EF6;
+	color:  #FFF;
 	font-family: 'Poppins', sans-serif;
 	max-width: 200px;
+	text-transform: lowercase;
+	cursor: pointer;
 }
 
 .button:hover {

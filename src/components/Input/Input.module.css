@@ -1,21 +1,16 @@
 .input {
 	display: flex;
 	color: #000000;
-	width: 360px;
-	padding: 24px 45px;
+	width: 250px;
+	padding: 18px 38px;
 	align-items: center;
-	background-color: inherit;
+	background: transparent;
 	border-radius: 12px;
-	border: 1px solid var(--grey-700, #323B54);
+	border: 1px solid  #323B54;
 	font-size: 14px;
 	font-style: normal;
 	font-weight: 400;
 	line-height: 16px;
 	position: relative;
 	font-family: 'Poppins', sans-serif;
-}
-
-.inputImage {
-	position: absolute;
-	padding: 20px 15px;
 }
