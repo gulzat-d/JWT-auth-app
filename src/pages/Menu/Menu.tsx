@@ -1,3 +1,4 @@
+import styles from './Menu.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
 import axios, { AxiosError } from 'axios';
@@ -59,7 +60,7 @@ function Menu() {
 	}, [jwt])
 
 	return (
-		<div>
+		<div className={styles.wrapper}>
 			<div>
 				{state && state.name}
 			</div>
