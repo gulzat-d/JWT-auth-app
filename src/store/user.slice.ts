@@ -4,24 +4,34 @@ import axios, { AxiosError } from 'axios';
 import { JWTResponse } from '../interfaces/JWT.interface';
 import { loadState } from './localStorage';
 
-export const JWT_PERSISTENT_STATE = 'jwt';
+export const JWT_PERSISTENT_STATE = 'jwtData';
 
-export interface JWTState {
+export interface JWT {
 	access_token: string | null;
 	refresh_token: string | null;
 }
 
+export interface JWTState {
+	jwt: JWT | null;
+	loginErrorMessage?: string | null;
+}
+
 const initialState: JWTState = loadState(JWT_PERSISTENT_STATE)??{
-	access_token: null,
-	refresh_token: null
+	jwt: null
 }
 
 export const refreshToken = createAsyncThunk('user/refreshToken', 
 	async (refresh_token) => {
-		const { data } = await axios.post(`${PREFIX}/refresh-token`, {
-			"refreshToken": `${refresh_token}`
-		})
-		return data;
+		try {
+			const { data } = await axios.post(`${PREFIX}/refresh-token`, {
+				"refreshToken": `${refresh_token}`
+			})
+			return data;
+		} catch (error) {
+				if (error instanceof AxiosError) {
+					throw new Error(error.response?.data.message);
+			}
+		}
 	}
 )
 
@@ -46,21 +56,22 @@ export const userSlice = createSlice({
 	initialState,
 	reducers: {
 		logout: (state) => {
-			state.access_token = null;
-			state.refresh_token = null;
+			state.jwt = null;
+		},
+		getToken: (state) => {
+			state.jwt;
 		}
 	},
 	extraReducers: (builder) => {
 		builder.addCase(getTokens.fulfilled, (state, action: PayloadAction<JWTResponse>)=>{
-			return state = action.payload;
+			state.jwt = action.payload;
+			state.loginErrorMessage = null;
 		});
 		builder.addCase(getTokens.rejected, (state, action)=>{
-			console.log(`error  ${action.error.message}`);
+			state.loginErrorMessage = action.error.message;
 		});
 		builder.addCase(refreshToken.fulfilled, (state, action)=>{
-			console.log(`extraReducers access_token ${state.access_token}`);
-			console.log(`extraReducers refresh_token ${action.payload.access_token}`);
-			return state = action.payload;
+			state.jwt = action.payload;
 		});
 	}
 })

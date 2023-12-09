@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 function Auth() {
 
 	const dispatch = useDispatch();
-	const tokens = useSelector((s: RootState) => s.user);
+	const { jwt, loginErrorMessage } = useSelector((s: RootState) => s.user);
 	const navigate = useNavigate();
 
 	const submit = async (e: FormEvent) => {
@@ -18,16 +18,17 @@ function Auth() {
 		const formData = new FormData(form);
 		const data = Object.fromEntries(formData);
 		dispatch(getTokens(data));
-		navigate('/');
 	}
 
-
-
 	useEffect(() => {
-	}, [tokens])
+		if (jwt) {
+			navigate('/');
+		}
+	}, [jwt])
 
 	return (
 		<>
+			{loginErrorMessage && <div>Неверный логин или пароль</div>}
 			<form onSubmit={submit}>
 				<Input placeholder='Введите логин' type='text' name='login'></Input>
 				<Input placeholder='Введите пароль' type='password' name='password'></Input>
