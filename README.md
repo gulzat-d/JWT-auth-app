@@ -8,10 +8,10 @@ email: john@mail.com
 пароль: changeme
 
 Необходимые зависимости:
-npm init vite@latest
-npm install axios
-npm install react-router react-router-dom
-npm install @reduxjs/toolkit
+1) npm init vite@latest
+2) npm install axios
+3) npm install react-router react-router-dom
+4) npm install @reduxjs/toolkit
 
 Команда для запуска:
 npm run dev
